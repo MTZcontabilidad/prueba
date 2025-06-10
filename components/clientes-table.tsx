@@ -2,16 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 // Tipo para los datos del cliente - ajusta según tu estructura de BD
 interface Cliente {
@@ -26,6 +16,7 @@ interface Cliente {
 export function ClientesTable() {
 
   const [clientes, setClientes] = useState<Cliente[]>([]);
+  console.log(clientes);
 
   useEffect(() => {
     const fetchClientes = async () => {

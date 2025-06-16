@@ -9,7 +9,7 @@ interface UseCurrentUserReturn {
   error: string | null;
   refetch: () => Promise<void>;
   updateUser: (updates: Partial<User>) => Promise<void>;
-  updateSettings: (settings: any) => Promise<void>;
+  updateSettings: (settings: unknown) => Promise<void>;
 }
 
 export function useCurrentUser(): UseCurrentUserReturn {
@@ -45,7 +45,7 @@ export function useCurrentUser(): UseCurrentUserReturn {
     }
   }, [user]);
 
-  const updateSettings = useCallback(async (settings: any) => {
+  const updateSettings = useCallback(async (settings: unknown) => {
     if (!user) return;
     
     try {
@@ -78,7 +78,7 @@ interface UseUsersReturn {
   loading: boolean;
   error: string | null;
   fetchUsersByClient: (clientId: string) => Promise<void>;
-  createUser: (userData: any) => Promise<User>;
+  createUser: (userData: unknown) => Promise<User>;
   updateUser: (id: string, updates: Partial<User>) => Promise<User>;
   deactivateUser: (id: string) => Promise<void>;
 }
@@ -102,7 +102,7 @@ export function useUsers(): UseUsersReturn {
     }
   }, []);
 
-  const createUser = useCallback(async (userData: any) => {
+  const createUser = useCallback(async (userData: unknown) => {
     try {
       const newUser = await UserService.createUserAfterSignUp(
         userData.authId,

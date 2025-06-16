@@ -73,7 +73,7 @@ export function UserProfile() {
     try {
       await updateUser(formData);
       setIsEditing(false);
-    } catch (error) {
+    } catch (_error) {
       console.error("Error saving profile:", error);
     } finally {
       setIsSaving(false);
@@ -86,7 +86,7 @@ export function UserProfile() {
     
     try {
       await updateSettings({ [key]: value });
-    } catch (error) {
+    } catch (_error) {
       // Revertir cambio si falla
       setSettings(settings);
     }

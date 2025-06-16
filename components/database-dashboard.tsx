@@ -23,11 +23,11 @@ interface TableSummary {
   name: string;
   columns: TableInfo[];
   rowCount?: number;
-  sampleData?: any[];
+  sampleData?: unknown[];
 }
 
 interface QueryResult {
-  data: any[] | null;
+  data: unknown[] | null;
   error: string | null;
   count?: number;
   executionTime: number;
@@ -251,7 +251,7 @@ export function DatabaseDashboard() {
     }
   };
 
-  const convertToCSV = (data: any[]): string => {
+  const convertToCSV = (data: unknown[]): string => {
     if (data.length === 0) return '';
     
     const headers = Object.keys(data[0]);

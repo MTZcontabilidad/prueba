@@ -78,7 +78,7 @@ export function ClientForm({
       toast.success(client ? "Cliente actualizado exitosamente" : "Cliente creado exitosamente");
       onSuccess(result);
       form.reset();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error al guardar cliente:", error);
       toast.error(error.message || "Error al guardar el cliente");
     } finally {
@@ -88,7 +88,7 @@ export function ClientForm({
 
   const formatRut = (value: string) => {
     // Eliminar caracteres no válidos
-    let rut = value.replace(/[^0-9kK]/g, '');
+    const rut = value.replace(/[^0-9kK]/g, '');
     
     // Formatear
     if (rut.length > 1) {

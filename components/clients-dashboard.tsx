@@ -204,6 +204,7 @@ export function ClientsDashboard() {
             Exportar CSV
           </Button>
           <Button variant="outline" onClick={() => window.location.href = '/clients/import'}>
+import { useClients } from "@/lib/hooks/useClients";
             <FileSpreadsheet className="mr-2 h-4 w-4" />
             Importar
           </Button>

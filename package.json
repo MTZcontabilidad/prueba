@@ -5,7 +5,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean-imports": "node scripts/clean-unused-imports.js"
+    "clean-imports": "node scripts/clean-unused-imports.js",
+    "fix-errors": "node scripts/fix-eslint-errors.js",
+    "fix-all": "npm run fix-errors && npm run clean-imports"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

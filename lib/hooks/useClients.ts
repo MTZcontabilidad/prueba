@@ -56,9 +56,9 @@ export function useClients(options: UseClientsOptions = {}): UseClientsReturn {
       
       setClients(result.data);
       setTotal(result.total);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching clients:', err);
-      setError(err.message || 'Error al cargar clientes');
+      setError((err instanceof Error ? err.message : String(err)) || 'Error al cargar clientes');
       toast.error('Error al cargar los clientes');
     } finally {
       setLoading(false);
@@ -85,9 +85,9 @@ export function useClients(options: UseClientsOptions = {}): UseClientsReturn {
       
       toast.success('Cliente creado exitosamente');
       return newClient;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error creating client:', err);
-      const message = err.message || 'Error al crear el cliente';
+      const message = (err instanceof Error ? err.message : String(err)) || 'Error al crear el cliente';
       toast.error(message);
       throw new Error(message);
     }
@@ -112,9 +112,9 @@ export function useClients(options: UseClientsOptions = {}): UseClientsReturn {
       
       toast.success('Cliente actualizado exitosamente');
       return updatedClient;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error updating client:', err);
-      const message = err.message || 'Error al actualizar el cliente';
+      const message = (err instanceof Error ? err.message : String(err)) || 'Error al actualizar el cliente';
       toast.error(message);
       throw new Error(message);
     }
@@ -134,9 +134,9 @@ export function useClients(options: UseClientsOptions = {}): UseClientsReturn {
       if (clients.length === 1 && page > 1) {
         setPage(page - 1);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error deleting client:', err);
-      const message = err.message || 'Error al eliminar el cliente';
+      const message = (err instanceof Error ? err.message : String(err)) || 'Error al eliminar el cliente';
       toast.error(message);
       throw new Error(message);
     }

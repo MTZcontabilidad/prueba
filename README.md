@@ -1,105 +1,229 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# 🚀 Sistema de Gestión de Clientes - Next.js + Supabase
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-green?style=flat-square&logo=supabase)](https://supabase.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com)
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## 📋 Descripción
 
-## Features
+Sistema completo de gestión de clientes construido con las últimas tecnologías web. Diseñado para empresas chilenas, incluye validación de RUT, manejo de datos empresariales y funcionalidades avanzadas de administración.
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+## ✨ Características Principales
 
-## Demo
+### 🔐 **Autenticación y Seguridad**
+- ✅ Autenticación completa con Supabase Auth
+- ✅ Políticas RLS (Row Level Security) implementadas
+- ✅ Middleware de protección de rutas
+- ✅ Roles de usuario (admin/usuario)
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+### 📊 **Gestión de Clientes (CRUD Completo)**
+- ✅ **Crear**: Formulario con validación completa
+- ✅ **Leer**: Listado con paginación y búsqueda
+- ✅ **Actualizar**: Edición inline y por formulario
+- ✅ **Eliminar**: Con confirmación y permisos
 
-## Deploy to Vercel
+### 🎯 **Funcionalidades Avanzadas**
+- ✅ **Dashboard con Métricas**: Estadísticas en tiempo real
+- ✅ **Sistema de Reportes**: Generación de informes personalizados
+- ✅ **Importación Excel/CSV**: Carga masiva de clientes
+- ✅ **Exportación de Datos**: CSV, Excel y PDF
+- ✅ **Búsqueda Avanzada**: Filtros múltiples
+- ✅ **Vista Dual**: Tarjetas y tabla
+- ✅ **Modo Oscuro/Claro**: Tema adaptable
 
-Vercel deployment will guide you through creating a Supabase account and project.
+### 🏆 **Validaciones Robustas**
+- ✅ Validación de RUT chileno (módulo 11)
+- ✅ Formato de teléfono chileno (+56)
+- ✅ Validación de email RFC 5322
+- ✅ Campos requeridos y opcionales
+- ✅ Mensajes de error personalizados
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+## 🛠️ Tecnologías Utilizadas
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+- **Frontend**: Next.js 15 (App Router)
+- **Base de Datos**: Supabase (PostgreSQL)
+- **Estilos**: Tailwind CSS + shadcn/ui
+- **Validación**: Zod + React Hook Form
+- **Estado**: Custom Hooks
+- **Notificaciones**: React Hot Toast
+- **Iconos**: Lucide React
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+## 📁 Estructura del Proyecto
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+```
+├── app/
+│   ├── auth/              # Páginas de autenticación
+│   ├── clientes/          # CRUD de clientes
+│   │   ├── page.tsx       # Listado principal
+│   │   ├── [id]/          # Detalle/edición
+│   │   └── importar/      # Importación masiva
+│   ├── dashboard/         # Dashboard con métricas
+│   └── reportes/          # Generador de reportes
+├── components/
+│   ├── clientes/          # Componentes específicos
+│   ├── ui/                # Componentes base (shadcn)
+│   └── providers/         # Context providers
+├── lib/
+│   ├── services/          # Lógica de negocio
+│   ├── schemas/           # Validaciones Zod
+│   ├── hooks/             # Custom hooks
+│   └── supabase/          # Cliente y tipos
+└── public/                # Archivos estáticos
+```
 
-## Clone and run locally
+## 🚀 Inicio Rápido
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+### Prerrequisitos
 
-2. Create a Next.js app using the Supabase Starter template npx command
+- Node.js 18+ instalado
+- Cuenta en [Supabase](https://supabase.com)
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+### Instalación
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+1. **Clonar el repositorio**
+```bash
+git clone [tu-repositorio]
+cd prueba
+```
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
+2. **Instalar dependencias**
+```bash
+npm install
+```
 
-3. Use `cd` to change into the app's directory
+3. **Configurar variables de entorno**
+```bash
+cp .env.example .env.local
+```
 
-   ```bash
-   cd with-supabase-app
-   ```
+Edita `.env.local` con tus credenciales de Supabase:
+```env
+NEXT_PUBLIC_SUPABASE_URL=tu-url-de-supabase
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
+```
 
-4. Rename `.env.example` to `.env.local` and update the following:
+4. **Iniciar el servidor de desarrollo**
 
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
+**Opción A - Windows (Más fácil):**
+```bash
+# Doble clic en:
+iniciar.bat
+```
 
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
+**Opción B - Manual:**
+```bash
+npm run dev
+```
 
-5. You can now run the Next.js local development server:
+5. **Abrir en el navegador**
+```
+http://localhost:3000
+```
 
-   ```bash
-   npm run dev
-   ```
+## 📖 Guías de Uso
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+### Dashboard Principal
+- Accede a `/dashboard` para ver métricas y estadísticas
+- Visualiza distribución por ciudad
+- Últimos clientes registrados
+- Tasas de activación
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+### Gestión de Clientes
+1. **Crear Cliente**: Clic en "Nuevo Cliente"
+2. **Buscar**: Usa la barra de búsqueda superior
+3. **Filtrar**: Por ciudad o actividad
+4. **Exportar**: Botón "Exportar CSV"
+5. **Importar**: Botón "Importar" → Sube archivo Excel/CSV
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+### Generación de Reportes
+1. Ve a `/reportes`
+2. Selecciona tipo de reporte
+3. Elige campos a incluir
+4. Aplica filtros si necesitas
+5. Genera y descarga
 
-## Feedback and issues
+### Importación Masiva
+1. Ve a `/clientes/importar`
+2. Descarga la plantilla CSV
+3. Completa los datos
+4. Sube el archivo
+5. Revisa los resultados
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+## 🗄️ Base de Datos
 
-## More Supabase examples
+### Tabla CLIENTE
+```sql
+CREATE TABLE public."CLIENTE" (
+    id_cliente BIGINT PRIMARY KEY,
+    nombre_cliente TEXT NOT NULL,
+    rut TEXT NOT NULL,
+    direccion TEXT,
+    ciudad TEXT,
+    comuna TEXT,
+    telefono TEXT,
+    email TEXT,
+    fec_ini_actividades TEXT,
+    actividad TEXT,
+    codigo TEXT,
+    representante_legal TEXT,
+    rut_represente TEXT,
+    logo TEXT
+);
+```
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+### Políticas RLS
+- SELECT: Usuarios autenticados
+- INSERT/UPDATE: Usuarios autenticados
+- DELETE: Solo administradores
+
+## 🔧 Scripts Disponibles
+
+```bash
+npm run dev          # Desarrollo
+npm run build        # Compilar producción
+npm start           # Iniciar producción
+npm run lint        # Verificar código
+```
+
+## 📝 Características por Implementar
+
+- [ ] Integración con API SII
+- [ ] Facturación electrónica
+- [ ] Sistema de cotizaciones
+- [ ] Historial de cambios
+- [ ] API REST pública
+- [ ] Tests E2E con Playwright
+
+## 🤝 Contribuir
+
+1. Fork el proyecto
+2. Crea tu rama (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add: nueva característica'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
+
+## 👥 Equipo
+
+Desarrollado con ❤️ por el equipo de MTZcontabilidad
+
+---
+
+### 🆘 Soporte
+
+Si encuentras algún problema o tienes preguntas:
+
+1. Revisa la [documentación completa](./DIAGNOSTICO_SUPABASE.md)
+2. Crea un issue en GitHub
+3. Contacta al equipo de desarrollo
+
+### 🌟 Agradecimientos
+
+- [Next.js](https://nextjs.org) - Framework React
+- [Supabase](https://supabase.com) - Backend as a Service
+- [shadcn/ui](https://ui.shadcn.com) - Componentes UI
+- [Tailwind CSS](https://tailwindcss.com) - Framework CSS

@@ -11,27 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Search, 
-  Users, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Filter,
-  Download,
-  Eye,
-  Edit,
-  MoreVertical,
-  UserCheck,
-  Briefcase,
-  RefreshCw,
-  Loader2,
-  Plus,
-  Trash2,
-  ChevronLeft,
-  ChevronRight,
-  FileSpreadsheet
-} from "lucide-react";
+import { Search, Users, Mail, Phone, MapPin, Filter, Download, Edit, MoreVertical, UserCheck, Briefcase, RefreshCw, Loader2, Plus, Trash2, ChevronLeft, ChevronRight, FileSpreadsheet } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,

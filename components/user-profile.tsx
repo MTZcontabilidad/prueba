@@ -8,18 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Briefcase,
-  Calendar,
-  Settings,
-  Shield,
-  Save,
-  Loader2
-} from "lucide-react";
+import { User, Mail, Phone, MapPin, Briefcase, Calendar, Shield, Save, Loader2 } from "lucide-react";
 import { formatRut, validateRut } from "@/lib/utils/rut-validator";
 import toast from "react-hot-toast";
 

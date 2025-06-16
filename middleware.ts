@@ -1,5 +1,5 @@
 // import { updateSession } from "@/lib/supabase/middleware";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function middleware(_request: NextRequest) {
   // TEMPORALMENTE DESACTIVADO PARA DEBUGGING

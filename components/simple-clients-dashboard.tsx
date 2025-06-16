@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { CyberButton, CyberCard, CyberInput, CyberBadge } from "@/components/ui/cyber-ui";
 import { 
@@ -42,12 +42,7 @@ export function SimpleClientsDashboard() {
 
   const supabase = createClient();
 
-  useEffect(() => {
-    console.log("Estoy aca")
-    fetchClients();
-  }, []);
-
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -91,7 +86,12 @@ export function SimpleClientsDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [supabase]);
+
+  useEffect(() => {
+    console.log("Estoy aca")
+    fetchClients();
+  }, [fetchClients]);
 
   const filteredClients = clients.filter(client =>
     !searchTerm || [

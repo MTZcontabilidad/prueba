@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,11 +44,7 @@ export function DatabaseDashboard() {
 
   const supabase = createClient();
 
-  useEffect(() => {
-    analyzeTables();
-  }, []);
-
-  const analyzeTables = async () => {
+  const analyzeTables = useCallback(async () => {
     setLoading(true);
     setError(null);
     
@@ -73,9 +69,13 @@ export function DatabaseDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const processSchemaData = async (schemaData: TableInfo[]) => {
+  useEffect(() => {
+    analyzeTables();
+  }, [analyzeTables]);
+
+  const processSchemaData = useCallback(async (schemaData: TableInfo[]) => {
     const tablesMap = new Map<string, TableInfo[]>();
     
     schemaData.forEach((col: TableInfo) => {
@@ -111,9 +111,9 @@ export function DatabaseDashboard() {
     }
 
     setTables(tablesSummary);
-  };
+  }, [supabase]);
 
-  const analyzeKnownTables = async () => {
+  const analyzeKnownTables = useCallback(async () => {
     const knownTables = [
       'CLIENTE', 'cliente', 'clientes',
       'PRODUCTO', 'producto', 'productos', 
@@ -158,7 +158,7 @@ export function DatabaseDashboard() {
     }
 
     setTables(foundTables);
-  };
+  }, [supabase]);
 
   const executeCustomQuery = async () => {
     if (!customQuery.trim()) return;
@@ -182,7 +182,7 @@ export function DatabaseDashboard() {
           setQueryResult({
             data,
             error: error?.message || null,
-            count,
+            count: count || 0,
             executionTime
           });
         } else {
@@ -251,15 +251,15 @@ export function DatabaseDashboard() {
     }
   };
 
-  const convertToCSV = (data: unknown[]): string => {
+    const convertToCSV = (data: unknown[]): string => {
     if (data.length === 0) return '';
-    
-    const headers = Object.keys(data[0]);
+
+    const headers = Object.keys(data[0] as Record<string, unknown>);
     const csvContent = [
       headers.join(','),
       ...data.map(row => 
         headers.map(header => {
-          const value = row[header];
+          const value = (row as Record<string, unknown>)[header];
           return typeof value === 'string' ? `"${value}"` : value;
         }).join(',')
       )
@@ -539,7 +539,7 @@ export function DatabaseDashboard() {
                         <table className="w-full text-sm border-collapse border">
                           <thead>
                             <tr className="bg-gray-50">
-                              {Object.keys(table.sampleData[0]).map(key => (
+                              {Object.keys(table.sampleData[0] as Record<string, unknown>).map(key => (
                                 <th key={key} className="border p-2 text-left font-medium">
                                   {key}
                                 </th>
@@ -549,7 +549,7 @@ export function DatabaseDashboard() {
                           <tbody>
                             {table.sampleData.map((row, idx) => (
                               <tr key={idx} className="hover:bg-gray-50">
-                                {Object.values(row).map((value, cellIdx) => (
+                                {Object.values(row as Record<string, unknown>).map((value, cellIdx) => (
                                   <td key={cellIdx} className="border p-2">
                                     {value === null ? (
                                       <span className="text-gray-400 italic">null</span>

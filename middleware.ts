@@ -1,7 +1,7 @@
 // import { updateSession } from "@/lib/supabase/middleware";
 import { NextResponse } from "next/server";
 
-export async function middleware(_request: NextRequest) {
+export async function middleware() {
   // TEMPORALMENTE DESACTIVADO PARA DEBUGGING
   return NextResponse.next();
   // return await updateSession(request);

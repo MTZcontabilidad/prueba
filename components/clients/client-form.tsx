@@ -80,7 +80,7 @@ export function ClientForm({
       form.reset();
     } catch (error: unknown) {
       console.error("Error al guardar cliente:", error);
-      toast.error(error.message || "Error al guardar el cliente");
+      toast.error(error instanceof Error ? error.message : "Error al guardar el cliente");
     } finally {
       setIsSubmitting(false);
     }

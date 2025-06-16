@@ -113,7 +113,7 @@ export interface User extends Timestamps {
   // Metadata
   last_login?: string;
   last_login_ip?: string;
-  settings: Record<string, any>;
+  settings: Record<string, unknown>;
   
   // Referencias legacy
   legacy_user_id?: number;
@@ -184,7 +184,7 @@ export interface TaxDocument extends Timestamps {
   
   // Metadata
   notes?: string;
-  reference?: Record<string, any>;
+  reference?: Record<string, unknown>;
   created_by?: UUID;
   
   // Referencia legacy
@@ -590,12 +590,8 @@ export type Database = {
         Update: Partial<Omit<BankTransaction, 'id' | 'created_at' | 'updated_at'>>;
       };
     };
-    Views: {
-      // Agregar vistas según necesidad
-    };
-    Functions: {
-      // Agregar funciones según necesidad
-    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
     Enums: {
       user_type: 'admin' | 'accountant' | 'client' | 'employee';
       client_type: 'company' | 'individual';

@@ -59,7 +59,7 @@ export default async function TestConnection() {
           <li>Proyecto ID: gyxqhfsqdgblxywmlpnd</li>
           <li>Tabla: CLIENTE</li>
           <li>RLS habilitado: Sí</li>
-          <li>Política: "Temporary access to CLIENTE" (PERMISSIVE)</li>
+          <li>Política: Temporary access to CLIENTE (PERMISSIVE)</li>
         </ul>
       </div>
     </div>

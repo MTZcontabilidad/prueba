@@ -1,11 +1,12 @@
 import { ClientDetailWrapper } from "@/components/clients/client-detail-wrapper";
 
 interface ClientDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function ClientDetailPage({ params }: ClientDetailPageProps) {
-  return <ClientDetailWrapper clientId={params.id} />;
+export default async function ClientDetailPage({ params }: ClientDetailPageProps) {
+  const { id } = await params;
+  return <ClientDetailWrapper clientId={id} />;
 } 

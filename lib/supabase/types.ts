@@ -228,15 +228,9 @@ export interface Database {
         Update: Partial<Database['public']['Tables']['products_services']['Insert']>
       }
     }
-    Views: {
-      // Agregar vistas según necesidad
-    }
-    Functions: {
-      // Agregar funciones según necesidad
-    }
-    Enums: {
-      // Agregar enums según necesidad
-    }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
 

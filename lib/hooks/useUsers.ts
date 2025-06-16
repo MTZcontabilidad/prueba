@@ -9,7 +9,7 @@ interface UseCurrentUserReturn {
   error: string | null;
   refetch: () => Promise<void>;
   updateUser: (updates: Partial<User>) => Promise<void>;
-  updateSettings: (settings: unknown) => Promise<void>;
+  updateSettings: (settings: Record<string, unknown>) => Promise<void>;
 }
 
 export function useCurrentUser(): UseCurrentUserReturn {
@@ -45,12 +45,12 @@ export function useCurrentUser(): UseCurrentUserReturn {
     }
   }, [user]);
 
-  const updateSettings = useCallback(async (settings: unknown) => {
+  const updateSettings = useCallback(async (settings: Record<string, unknown>) => {
     if (!user) return;
     
     try {
       await UserService.updateSettings(user.id, settings);
-      setUser(prev => prev ? { ...prev, settings: { ...prev.settings, ...settings } } : null);
+      setUser(prev => prev ? { ...prev, settings: settings as import('@/lib/supabase/types').Json } : null);
       toast.success('Configuración actualizada');
     } catch (err) {
       console.error('Error updating settings:', err);
@@ -104,9 +104,10 @@ export function useUsers(): UseUsersReturn {
 
   const createUser = useCallback(async (userData: unknown) => {
     try {
+      const data = userData as { authId: string; email: string; firstName: string; lastName: string; taxId?: string; clientId?: string };
       const newUser = await UserService.createUserAfterSignUp(
-        userData.authId,
-        userData
+        data.authId,
+        data
       );
       setUsers(prev => [...prev, newUser]);
       toast.success('Usuario creado exitosamente');

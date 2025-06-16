@@ -1,6 +1,6 @@
 "use client";
 
-import { useState} from "react";
+import { useState, useEffect, useCallback} from "react";
 import { ClientService } from "@/lib/services/client.service";
 import { Client } from "@/lib/supabase/types";
 import { ClientFormData } from "@/lib/schemas/client.schema";
@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import toast from "react-hot-toast";
+import { useClients } from "@/lib/hooks/useClients";
 
 export function ClientsDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -56,24 +57,24 @@ export function ClientsDashboard() {
   });
   
   // Manejar cambios en filtros
-  const handleFiltersChange = () => {
+  const handleFiltersChange = useCallback(() => {
     setFilters({
       searchTerm,
       city: selectedCity,
       activity: selectedActivity
     });
     setPage(1);
-  };
+  }, [searchTerm, selectedCity, selectedActivity, setFilters, setPage]);
   
   // Efecto para aplicar filtros cuando cambien
-  useState(() => {
+  useEffect(() => {
     console.log("Estoy aca")
     const timeoutId = setTimeout(() => {
       handleFiltersChange();
     }, 300);
     
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, selectedCity, selectedActivity]);
+  }, [handleFiltersChange]);
   
   // Obtener estadísticas (simplificado)
   const stats = {
@@ -204,7 +205,6 @@ export function ClientsDashboard() {
             Exportar CSV
           </Button>
           <Button variant="outline" onClick={() => window.location.href = '/clients/import'}>
-import { useClients } from "@/lib/hooks/useClients";
             <FileSpreadsheet className="mr-2 h-4 w-4" />
             Importar
           </Button>
@@ -578,7 +578,7 @@ import { useClients } from "@/lib/hooks/useClients";
           setShowForm(false);
           setSelectedClient(null);
         }}
-        onSuccess={(client) => {
+        onSuccess={() => {
           setShowForm(false);
           setSelectedClient(null);
         }}

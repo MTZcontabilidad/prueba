@@ -43,14 +43,14 @@ export class UserService {
   ): Promise<User> {
     const supabase = createClient();
     
-    const newUser: UserInsert = {
+    const newUser: Partial<UserInsert> = {
       auth_id: authId,
       email: userData.email,
       first_name: userData.firstName,
       last_name: userData.lastName,
       tax_id: userData.taxId || null,
       client_id: userData.clientId || null,
-      user_type: 'client', // Default
+      user_type: 'client',
       is_active: true,
       must_change_password: false,
       failed_login_attempts: 0,
@@ -235,7 +235,7 @@ export class UserService {
   /**
    * Actualizar configuración del usuario
    */
-  static async updateSettings(userId: string, settings: any): Promise<void> {
+  static async updateSettings(userId: string, settings: Record<string, unknown>): Promise<void> {
     const supabase = createClient();
     
     const { data: currentUser } = await supabase

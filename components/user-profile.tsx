@@ -27,10 +27,16 @@ export function UserProfile() {
     department: user?.department || ""
   });
 
+  type UserSettings = {
+    emailNotifications?: boolean;
+    twoFactorAuth?: boolean;
+    theme?: string;
+  };
+
   const [settings, setSettings] = useState({
-    emailNotifications: user?.settings?.emailNotifications ?? true,
-    twoFactorAuth: user?.settings?.twoFactorAuth ?? false,
-    theme: user?.settings?.theme || "light"
+    emailNotifications: (user?.settings as UserSettings)?.emailNotifications ?? true,
+    twoFactorAuth: (user?.settings as UserSettings)?.twoFactorAuth ?? false,
+    theme: (user?.settings as UserSettings)?.theme || "light"
   });
 
   if (loading) {
@@ -73,20 +79,20 @@ export function UserProfile() {
     try {
       await updateUser(formData);
       setIsEditing(false);
-    } catch (_error) {
+    } catch (error) {
       console.error("Error saving profile:", error);
     } finally {
       setIsSaving(false);
     }
   };
 
-  const handleSettingsChange = async (key: keyof typeof settings, value: any) => {
+  const handleSettingsChange = async (key: keyof typeof settings, value: unknown) => {
     const newSettings = { ...settings, [key]: value };
     setSettings(newSettings);
     
     try {
       await updateSettings({ [key]: value });
-    } catch (_error) {
+    } catch {
       // Revertir cambio si falla
       setSettings(settings);
     }
